@@ -202,7 +202,9 @@ textarea.field{min-height:104px;resize:vertical}
 .slot{fill:none;stroke:rgba(244,247,255,.6);stroke-width:1.4;stroke-dasharray:5 4;transition:stroke .4s var(--ease)}
 .slot.on{stroke:var(--gold-hi);stroke-dasharray:none}
 .qtr{fill:none;stroke:var(--gold);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;opacity:.55;transition:stroke .5s var(--ease),opacity .5s var(--ease)}
-.qtr.on{stroke:var(--signal);opacity:1;filter:drop-shadow(0 0 3px rgba(56,195,255,.8))}
+.qtr.on{stroke:var(--signal);opacity:1;filter:drop-shadow(0 0 4px rgba(56,195,255,.9))}
+.slot.on{stroke-width:1.6}
+.qboard svg{filter:drop-shadow(0 18px 40px rgba(5,10,34,.55))}
 .ss{font:600 14px var(--display);letter-spacing:.08em;fill:var(--silk)}
 .ss.s{font-size:12px;fill:var(--muted)}
 .f-send p{margin:14px 0 0;font-size:.95rem;color:var(--muted)}
@@ -214,35 +216,43 @@ textarea.field{min-height:104px;resize:vertical}
 /* ---------- TP why ---------- */
 .why-grid{display:grid;gap:40px;margin-top:40px}
 @media (min-width:980px){.why-grid{grid-template-columns:5fr 7fr;column-gap:64px}}
-.stats p:not(.big){margin:12px 0 0;max-width:30ch;font-size:1.1rem}
-.stat{position:relative;padding-left:44px}
-.tpm{position:absolute;left:0;top:6px;width:26px;height:26px;border-radius:50%;border:3px solid var(--gold);background:var(--mask-deep)}
-.tpm::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--copper)}
-.tpl{display:block;font:600 .72rem/1 var(--display);letter-spacing:.18em;color:var(--gold-hi);margin-bottom:10px}
+.stats{position:relative;overflow:hidden;padding:30px 26px;background:rgba(12,20,62,.88);border:1px solid rgba(34,166,224,.25)}
+.stats::after{content:"";position:absolute;right:-70px;top:-70px;width:220px;height:220px;background:radial-gradient(closest-side,rgba(56,195,255,.28),transparent);pointer-events:none}
+.stats > p:not(.big){margin:12px 0 0;font-size:1.05rem}
 .big{display:flex;align-items:center;gap:.12em;margin:0;font:600 clamp(3.6rem,2.6rem + 4vw,6rem)/.9 var(--display);color:var(--silk);letter-spacing:-.02em}
 .big .star{width:.62em;height:.62em}
-.stat p{margin:12px 0 0;max-width:34ch}
-.tps{list-style:none;margin:0;padding:0 0 0 44px;position:relative;display:grid;gap:26px;align-content:center}
-.tps::before{content:"";position:absolute;left:12px;top:8px;bottom:8px;width:3px;background:var(--gold)}
-.tps li{position:relative}
-.tps li::before{content:"";position:absolute;left:-44px;top:-1px;width:26px;height:26px;border-radius:50%;border:3px solid var(--gold);background:var(--mask-deep);box-sizing:border-box}
-.tps li::after{content:"";position:absolute;left:-18px;top:11px;width:14px;height:2px;background:var(--line)}
-.tps li{font:600 clamp(1.15rem,1.05rem + .5vw,1.45rem)/1.25 var(--display);color:var(--silk)}
-.pay{margin-top:64px;padding-top:28px;border-top:1px dashed var(--line);display:grid;gap:22px}
-@media (min-width:900px){.pay{grid-template-columns:auto 1fr;align-items:center;column-gap:48px}}
-.pay h3{margin:0;font:600 1.2rem/1.2 var(--display);color:var(--silk)}
-.pay h3 .des{font-size:.55em;vertical-align:.25em}
-.marks{display:flex;flex-wrap:wrap;gap:22px 34px;list-style:none;margin:0;padding:0}
-.marks li{display:flex;align-items:center;gap:12px;color:var(--silk);font-weight:500}
-.marks svg{width:52px;height:36px;fill:none;stroke:var(--gold-hi);stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.stars{display:flex;gap:4px}.stars svg{width:20px;height:20px;fill:var(--gold-hi)}
+.stat2{display:flex;align-items:center;gap:14px;margin-top:22px;padding-top:20px;border-top:1px dashed var(--line)}
+.stat2 b{font:600 2.8rem/1 var(--display);color:var(--signal)}
+.stat2 span{max-width:20ch;line-height:1.35;color:var(--text)}
+.perks{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+@media (min-width:560px){.perks{grid-template-columns:1fr 1fr}}
+@media (max-width:559px){.perks li{display:grid;grid-template-columns:46px 1fr;column-gap:16px;align-items:center;padding:18px}.perks .pi{grid-row:span 2;margin:0}.perks li > span:last-child{margin-top:2px}}
+.perks li{position:relative;padding:22px 20px;background:rgba(12,20,62,.88);border:1px solid rgba(34,166,224,.25);transition:transform .5s var(--ease),border-color .4s var(--ease),box-shadow .4s var(--ease)}
+.perks li:hover{transform:translateY(-4px);border-color:rgba(56,195,255,.7);box-shadow:0 12px 30px rgba(5,10,34,.5),0 0 26px rgba(56,195,255,.18)}
+.pi{display:grid;place-items:center;width:46px;height:46px;margin-bottom:14px;border-radius:50%;color:var(--signal);background:rgba(34,166,224,.14);border:1px solid rgba(56,195,255,.5);box-shadow:0 0 18px rgba(56,195,255,.25)}
+.pi .ico{width:22px;height:22px}
+.perks li:hover .pi{animation:pip 1.2s var(--ease)}
+@keyframes pip{40%{box-shadow:0 0 0 8px rgba(56,195,255,.15),0 0 26px rgba(56,195,255,.5)}}
+.perks b{display:block;font:600 1.2rem/1.2 var(--display);color:var(--silk)}
+.perks li > span:last-child{display:block;margin-top:6px;font-size:.98rem;line-height:1.5;color:var(--text)}
+/* little machines in the board + map */
+.spin{animation:spin 1s linear infinite}.spin.slow{animation-duration:2.6s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rgb{animation:rgbp 2.4s ease-in-out infinite;filter:drop-shadow(0 0 3px #38c3ff)}
+@keyframes rgbp{50%{opacity:.45}}
+.bulb{animation:bulb 1.2s infinite;animation-delay:calc(var(--i) * -.4s)}
+@keyframes bulb{0%,33%{opacity:1}34%,100%{opacity:.15}}
+.ping{transform-box:fill-box;transform-origin:center;animation:ping 2.4s var(--ease) infinite}
+@keyframes ping{from{transform:scale(1);opacity:.9}to{transform:scale(1.18,1.26);opacity:0}}
+.bob{animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
 
 /* ---------- J6 visit ---------- */
 .vgrid{display:grid;gap:40px;margin-top:48px}
 @media (min-width:980px){.vgrid{grid-template-columns:7fr 5fr;column-gap:56px;align-items:center}}
 .vmap svg{width:100%;height:auto}
 .visit .vgrid > div{background:rgba(12,20,62,.82);padding:24px 22px;border:1px solid rgba(34,166,224,.25)}
-.why .tps{background:rgba(12,20,62,.82);padding:28px 22px 28px 66px;border:1px solid rgba(34,166,224,.25)}
-.why .tps::before{left:34px}
 .vmap figcaption{margin-top:10px;font:500 .72rem/1.3 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .addr{font-style:normal;font-size:1.12rem;line-height:1.6;color:var(--silk)}
 .addr strong{display:block;font:600 1.35rem/1.2 var(--display);margin-bottom:6px}
@@ -275,6 +285,10 @@ footer{background:var(--grain),var(--mask-deep);padding:40px var(--gut) 40px;bor
   <symbol id="i-ph" viewBox="0 0 24 24"><path d="M6.8 3.5h-2a1.3 1.3 0 0 0-1.3 1.4 16.5 16.5 0 0 0 15.6 15.6 1.3 1.3 0 0 0 1.4-1.3v-2a1 1 0 0 0-.8-1l-3.2-.8a1 1 0 0 0-1 .3l-1.2 1.3a12 12 0 0 1-5.7-5.7l1.3-1.2a1 1 0 0 0 .3-1l-.8-3.2a1 1 0 0 0-1-.8z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.7-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.3 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.6l2.8 6.1 6.6.7-5 4.5 1.5 6.5L12 17l-5.9 3.4 1.5-6.5-5-4.5 6.6-.7z"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.2a4.3 4.3 0 0 0 7 0"/><path d="M9 9.6h.01M15 9.6h.01"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3.5 12.6V4.4a.9.9 0 0 1 .9-.9h8.2l8 8a1.3 1.3 0 0 1 0 1.8l-6.4 6.4a1.3 1.3 0 0 1-1.8 0z"/><circle cx="8.2" cy="8.2" r="1.4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.6c0 4.6-3.2 8.2-7.5 9.4-4.3-1.2-7.5-4.8-7.5-9.4V6z"/><path d="M8.6 12.2l2.4 2.4 4.6-4.8"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></symbol>
 </svg>
 
 <header class="top" id="top">
@@ -432,12 +446,19 @@ footer{background:var(--grain),var(--mask-deep);padding:40px var(--gut) 40px;bor
         <svg viewBox="0 0 480 380" role="img" aria-labelledby="qb-t">
           <title id="qb-t">Build board showing which parts your choices seat</title>
           <defs>
-            <pattern id="ramchips" width="22" height="30" patternUnits="userSpaceOnUse"><rect x="3" y="4" width="14" height="22" fill="#1b1f1e"/></pattern>
-            <pattern id="gold6" width="6" height="8" patternUnits="userSpaceOnUse"><rect x="1" width="3.2" height="8" fill="#22a6e0"/></pattern>
+            <linearGradient id="qbBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17266e"/><stop offset="1" stop-color="#0a1238"/></linearGradient>
+            <pattern id="qbDots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r=".9" fill="rgba(127,211,255,.2)"/></pattern>
+            <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f7ff"/><stop offset=".5" stop-color="#b9c3d6"/><stop offset="1" stop-color="#8793ab"/></linearGradient>
+            <linearGradient id="shroud" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26304e"/><stop offset="1" stop-color="#0f1428"/></linearGradient>
+            <linearGradient id="rgbG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7fd3ff"/><stop offset=".5" stop-color="#22a6e0"/><stop offset="1" stop-color="#5b7bff"/></linearGradient>
+            <radialGradient id="cpuGlow"><stop offset="0" stop-color="#38c3ff" stop-opacity=".5"/><stop offset="1" stop-color="#38c3ff" stop-opacity="0"/></radialGradient>
+            <pattern id="gold6" width="6" height="8" patternUnits="userSpaceOnUse"><rect x="1" width="3.2" height="8" fill="#e3c272"/></pattern>
+            <g id="rotor"><path transform="rotate(0)" d="M0-4C4-14 14-19 19-13C12-12 6-8 3-2Z"/><path transform="rotate(60)" d="M0-4C4-14 14-19 19-13C12-12 6-8 3-2Z"/><path transform="rotate(120)" d="M0-4C4-14 14-19 19-13C12-12 6-8 3-2Z"/><path transform="rotate(180)" d="M0-4C4-14 14-19 19-13C12-12 6-8 3-2Z"/><path transform="rotate(240)" d="M0-4C4-14 14-19 19-13C12-12 6-8 3-2Z"/><path transform="rotate(300)" d="M0-4C4-14 14-19 19-13C12-12 6-8 3-2Z"/></g>
           </defs>
-          <rect x="6" y="6" width="468" height="368" rx="12" fill="#0a1238" stroke="rgba(244,247,255,.35)"/>
-          <g fill="none" stroke="#22a6e0" stroke-width="3"><circle cx="26" cy="26" r="8"/><circle cx="454" cy="26" r="8"/><circle cx="26" cy="354" r="8"/><circle cx="454" cy="354" r="8"/></g>
-          <g stroke="#2a4796" stroke-width="2" fill="none" opacity=".8"><path d="M40 120h60l12 12v40M60 330h90l14-14h40M410 80v40l-14 14h-20M250 350h80"/></g>
+          <rect x="6" y="6" width="468" height="368" rx="12" fill="url(#qbBg)" stroke="rgba(127,211,255,.35)"/>
+          <rect x="6" y="6" width="468" height="368" rx="12" fill="url(#qbDots)"/>
+          <g fill="#0a1238" stroke="#c3cddd" stroke-width="2.5"><circle cx="26" cy="26" r="7"/><circle cx="454" cy="26" r="7"/><circle cx="26" cy="354" r="7"/><circle cx="454" cy="354" r="7"/></g>
+          <g stroke="#2a4796" stroke-width="2" fill="none" opacity=".8"><path d="M40 120h60l12 12v40M60 350h90l14-14h40M410 80v40l-14 14h-20M250 360h80"/></g>
 
           <!-- traces -->
           <path class="qtr" data-p="ramA" d="M262 98H296"/>
@@ -455,39 +476,42 @@ footer{background:var(--grain),var(--mask-deep);padding:40px var(--gut) 40px;bor
           <rect class="slot" data-s="cpu" x="148" y="60" width="114" height="112"/>
           <text class="ss" x="148" y="52">CPU</text>
           <g class="part" data-p="cpu">
-            <rect x="152" y="64" width="106" height="104" fill="#a7adab"/>
-            <rect x="162" y="74" width="86" height="84" fill="#22a6e0"/>
-            <text x="205" y="114" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="13" fill="#0e1a4a">MITTAL</text>
-            <text x="205" y="130" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-size="8" letter-spacing="1.5" fill="#0e1a4a">SINCE 2010</text>
-            <path d="M166 152l8 0-8-8z" fill="#0e1a4a"/>
+            <circle cx="205" cy="116" r="78" fill="url(#cpuGlow)"/>
+            <rect x="152" y="64" width="106" height="104" rx="4" fill="url(#metal)"/>
+            <rect x="160" y="72" width="90" height="88" rx="3" fill="#fff"/>
+            <image href="logo.png" x="164" y="90" width="82" height="29"/>
+            <text x="205" y="138" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="600" font-size="7.5" letter-spacing="1.5" fill="#1d2c6f">SINCE 2010</text>
+            <path d="M164 156h8l-8-8z" fill="#1d2c6f"/>
           </g>
 
           <!-- RAM -->
           <rect class="slot" data-s="ramA" x="296" y="46" width="16" height="170"/>
           <rect class="slot" data-s="ramB" x="324" y="46" width="16" height="170"/>
           <text class="ss" x="300" y="234">RAM</text>
-          <g class="part" data-p="ramA"><rect x="293" y="50" width="22" height="162" fill="#1d2c6f" stroke="#22a6e0" stroke-width="1.5"/><rect x="293" y="56" width="22" height="150" fill="url(#ramchips)"/></g>
-          <g class="part" data-p="ramB"><rect x="321" y="50" width="22" height="162" fill="#1d2c6f" stroke="#22a6e0" stroke-width="1.5"/><rect x="321" y="56" width="22" height="150" fill="url(#ramchips)"/></g>
+          <g class="part" data-p="ramA"><rect x="293" y="50" width="22" height="162" rx="2" fill="#1d2c6f"/><rect x="295" y="62" width="18" height="144" rx="2" fill="url(#metal)"/><path d="M299 90h10M299 130h10M299 170h10" stroke="#8793ab" stroke-width="1.5"/><rect class="rgb" x="293" y="50" width="22" height="8" rx="2" fill="url(#rgbG)"/></g>
+          <g class="part" data-p="ramB"><rect x="321" y="50" width="22" height="162" rx="2" fill="#1d2c6f"/><rect x="323" y="62" width="18" height="144" rx="2" fill="url(#metal)"/><path d="M327 90h10M327 130h10M327 170h10" stroke="#8793ab" stroke-width="1.5"/><rect class="rgb" x="321" y="50" width="22" height="8" rx="2" fill="url(#rgbG)"/></g>
 
           <!-- SSD -->
           <rect class="slot" data-s="ssd" x="40" y="190" width="110" height="24"/>
           <text class="ss" x="40" y="182">SSD</text>
-          <g class="part" data-p="ssd"><rect x="40" y="190" width="110" height="24" fill="#1b1f1e"/><rect x="40" y="190" width="10" height="24" fill="url(#gold6)"/><rect x="62" y="195" width="26" height="14" fill="#1b7fc0"/><rect x="96" y="195" width="20" height="14" fill="#3a3f3d"/><rect x="122" y="195" width="20" height="14" fill="#3a3f3d"/></g>
+          <g class="part" data-p="ssd"><rect x="40" y="190" width="110" height="24" rx="2" fill="#1d2c6f"/><rect x="40" y="190" width="10" height="24" fill="url(#gold6)"/><rect x="56" y="194" width="30" height="16" rx="1.5" fill="#0b0f1e"/><rect x="91" y="194" width="22" height="16" rx="1.5" fill="#0b0f1e"/><rect x="118" y="195" width="26" height="14" rx="1" fill="#f4f7ff"/><text x="131" y="204.4" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="6.5" fill="#1d2c6f">NVMe</text></g>
 
           <!-- GPU -->
           <rect class="slot" data-s="gpu" x="40" y="244" width="300" height="12"/>
           <text class="ss" x="40" y="236">GRAPHICS CARD</text>
           <g class="part" data-p="gpu">
-            <rect id="gpuCard" x="40" y="250" width="290" height="74" fill="#1b1f1e" stroke="#a7adab" stroke-width="1.5"/>
+            <rect id="gpuCard" x="40" y="250" width="290" height="74" rx="6" fill="url(#shroud)" stroke="#4a5677" stroke-width="1.5"/>
             <rect x="40" y="250" width="120" height="6" fill="url(#gold6)"/>
-            <g fill="none" stroke="#f4f7ff" stroke-width="1.5"><circle class="fan" cx="88" cy="292" r="24"/><circle class="fan f2" cx="166" cy="292" r="24"/><circle class="fan f3" cx="244" cy="292" r="24"/></g>
-            <g fill="#f4f7ff"><circle class="fan" cx="88" cy="292" r="5"/><circle class="fan f2" cx="166" cy="292" r="5"/><circle class="fan f3" cx="244" cy="292" r="5"/></g>
+            <rect class="rgb" x="50" y="317" width="100" height="3" rx="1.5" fill="url(#rgbG)"/>
+            <g class="fan" transform="translate(88 287)"><circle r="24" fill="#0b0f1e" stroke="#4a5677" stroke-width="2"/><g class="spin"><use href="#rotor" fill="#3a4766"/></g><circle r="6" fill="#22a6e0"/></g><g class="fan f2" transform="translate(166 287)"><circle r="24" fill="#0b0f1e" stroke="#4a5677" stroke-width="2"/><g class="spin"><use href="#rotor" fill="#3a4766"/></g><circle r="6" fill="#22a6e0"/></g><g class="fan f3" transform="translate(244 287)"><circle r="24" fill="#0b0f1e" stroke="#4a5677" stroke-width="2"/><g class="spin"><use href="#rotor" fill="#3a4766"/></g><circle r="6" fill="#22a6e0"/></g>
           </g>
 
           <!-- PSU -->
           <rect class="slot" data-s="psu" x="366" y="270" width="92" height="84"/>
           <text class="ss" x="366" y="262">POWER SUPPLY</text>
-          <g class="part" data-p="psu"><rect x="366" y="270" width="92" height="84" fill="#1b1f1e" stroke="#a7adab" stroke-width="1.5"/><g stroke="#3a3f3d" stroke-width="3"><path d="M378 286h68M378 296h68M378 306h68M378 316h68M378 326h68"/></g><rect x="398" y="338" width="28" height="8" fill="#22a6e0"/></g>
+          <g class="part" data-p="psu"><rect x="366" y="270" width="92" height="84" rx="4" fill="url(#shroud)" stroke="#4a5677" stroke-width="1.5"/>
+            <g transform="translate(412 304)"><circle r="26" fill="#0b0f1e" stroke="#4a5677"/><g class="spin slow"><use href="#rotor" fill="#3a4766" transform="scale(1.15)"/></g><circle r="22" fill="none" stroke="#4a5677" stroke-dasharray="2 3"/><circle r="5" fill="#22a6e0"/></g>
+            <rect x="376" y="338" width="44" height="9" rx="1.5" fill="#f4f7ff"/><path d="M381 342.5h24" stroke="#1d2c6f" stroke-width="2"/><circle class="rgb" cx="444" cy="342.5" r="3.5" fill="#38c3ff"/></g>
 
           <circle id="sendDot" r="6" fill="#fff" stroke="#38c3ff" stroke-width="4"/>
         </svg>
@@ -517,14 +541,16 @@ footer{background:var(--grain),var(--mask-deep);padding:40px var(--gut) 40px;bor
     <h2 class="h2 rv" id="why-h">Why people keep coming back</h2>
     <div class="why-grid">
       <div class="stats rv">
-        <p class="big num">4.9<svg class="star" aria-hidden="true"><use href="#i-star"/></svg></p>
-        <p>on Justdial, from about 80 ratings. In Gorakhpur since 2010.</p>
+        <p class="big num"><span data-count="4.9">4.9</span><svg class="star" aria-hidden="true"><use href="#i-star"/></svg></p>
+        <p class="stars" aria-hidden="true"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></p>
+        <p>on Justdial, from about 80 ratings.</p>
+        <div class="stat2"><b class="num" data-count="16">16</b><span>years serving Gorakhpur, since 2010</span></div>
       </div>
-      <ul class="tps">
-        <li class="rv">Friendly staff who explain things patiently</li>
-        <li class="rv">Fair prices</li>
-        <li class="rv">Original, genuine parts</li>
-        <li class="rv">Pay by cash, card (Visa, Mastercard, RuPay) or UPI</li>
+      <ul class="perks">
+        <li class="rv"><span class="pi"><svg class="ico" aria-hidden="true"><use href="#i-smile"/></svg></span><b>Friendly staff</b><span>They explain things patiently.</span></li>
+        <li class="rv"><span class="pi"><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg></span><b>Fair prices</b><span>Customers keep calling them fair.</span></li>
+        <li class="rv"><span class="pi"><svg class="ico" aria-hidden="true"><use href="#i-shield"/></svg></span><b>Genuine parts</b><span>Original, branded products.</span></li>
+        <li class="rv"><span class="pi"><svg class="ico" aria-hidden="true"><use href="#i-card"/></svg></span><b>Pay your way</b><span>Cash, Visa, Mastercard, RuPay or UPI.</span></li>
       </ul>
     </div>
   </div>
@@ -541,41 +567,53 @@ footer{background:var(--grain),var(--mask-deep);padding:40px var(--gut) 40px;bor
         <svg viewBox="0 0 640 400" role="img" aria-labelledby="vm-t" id="vmap">
           <title id="vm-t">Stylised map: Mittal Computers sits on Cinema Road, directly opposite PVR Cinemas</title>
           <defs>
-            <pattern id="vpH" width="14" height="10" patternUnits="userSpaceOnUse"><rect x="4" width="6" height="10" fill="#22a6e0"/></pattern>
+            <linearGradient id="vmBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16246a"/><stop offset="1" stop-color="#0a1238"/></linearGradient>
+            <linearGradient id="metal2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4f7ff"/><stop offset=".5" stop-color="#b9c3d6"/><stop offset="1" stop-color="#8793ab"/></linearGradient>
             <radialGradient id="vglow"><stop offset="0" stop-color="#38c3ff" stop-opacity=".45"/><stop offset="1" stop-color="#38c3ff" stop-opacity="0"/></radialGradient>
           </defs>
-          <rect x="4" y="4" width="632" height="392" rx="14" fill="#0a1238" stroke="rgba(244,247,255,.35)"/>
-          <g stroke="#2a4796" stroke-width="2" fill="none"><path d="M30 60h90l14 14v40M520 50h80M560 330h50l12-12v-40M40 330h120l16-16h40M480 120h70l14 14v20"/></g>
-          <rect x="28" y="236" width="170" height="130" fill="none" stroke="rgba(244,247,255,.45)" stroke-dasharray="4 5"/>
-          <text class="ss s" x="40" y="356">SHAHI MARKET</text>
+          <rect x="4" y="4" width="632" height="392" rx="14" fill="url(#vmBg)" stroke="rgba(127,211,255,.35)"/>
+          <g stroke="rgba(127,211,255,.16)" stroke-width="8" stroke-linecap="round"><path d="M220 18V150M220 214V382M422 18V150M422 214V382"/></g>
+          <g fill="rgba(127,211,255,.06)" stroke="rgba(127,211,255,.15)">
+            <rect x="22" y="22" width="86" height="56" rx="6"/><rect x="118" y="22" width="88" height="56" rx="6"/><rect x="22" y="88" width="184" height="60" rx="6"/>
+            <rect x="436" y="22" width="180" height="58" rx="6"/><rect x="436" y="90" width="86" height="58" rx="6"/><rect x="532" y="90" width="84" height="58" rx="6"/>
+            <rect x="22" y="216" width="184" height="164" rx="8"/><rect x="436" y="216" width="180" height="164" rx="8"/>
+          </g>
+          <g fill="rgba(127,211,255,.12)"><rect x="36" y="232" width="44" height="34" rx="3"/><rect x="36" y="278" width="44" height="34" rx="3"/><rect x="92" y="232" width="44" height="34" rx="3"/><rect x="92" y="278" width="44" height="34" rx="3"/><rect x="148" y="232" width="44" height="34" rx="3"/><rect x="148" y="278" width="44" height="34" rx="3"/></g>
+          <text class="ss s" x="36" y="360">SHAHI MARKET</text>
 
-          <path id="road" d="M4 182H636" fill="none"/>
-          <g stroke="#22a6e0" stroke-width="5" stroke-linecap="round"><path d="M10 170H630M10 182H630M10 194H630"/></g>
-          <text class="ss" x="30" y="160">CINEMA ROAD</text>
-          <text class="ss" x="500" y="160">CINEMA ROAD</text>
+          <rect x="4" y="160" width="632" height="44" fill="#0b1440"/>
+          <g stroke="#22a6e0" stroke-width="3" stroke-linecap="round"><path d="M10 162H630M10 202H630"/></g>
+          <path id="road" d="M10 182H630" stroke="rgba(244,247,255,.4)" stroke-width="2" stroke-dasharray="14 12"/>
+          <g fill="rgba(244,247,255,.85)"><rect x="293" y="167" width="5" height="30" rx="1"/><rect x="302" y="167" width="5" height="30" rx="1"/><rect x="311" y="167" width="5" height="30" rx="1"/><rect x="320" y="167" width="5" height="30" rx="1"/><rect x="329" y="167" width="5" height="30" rx="1"/><rect x="338" y="167" width="5" height="30" rx="1"/><rect x="347" y="167" width="5" height="30" rx="1"/></g>
+          <text class="ss s" x="24" y="177">CINEMA ROAD</text>
+          <text class="ss s" x="616" y="197" text-anchor="end">CINEMA ROAD</text>
 
-          <rect x="230" y="56" width="180" height="80" fill="#1b1f1e"/>
-          <rect x="236" y="44" width="168" height="12" fill="url(#vpH)"/>
-          <rect x="236" y="136" width="168" height="12" fill="url(#vpH)"/>
-          <text x="320" y="102" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="600" font-size="20" letter-spacing="3" fill="#f4f7ff">PVR CINEMAS</text>
-          
+          <rect x="236" y="34" width="168" height="104" rx="6" fill="#121a3a" stroke="rgba(127,211,255,.3)"/>
+          <rect x="252" y="64" width="136" height="42" rx="4" fill="#0b0f1e" stroke="#38c3ff"/>
+          <text x="320" y="91" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="600" font-size="18" letter-spacing="3" fill="#f4f7ff">PVR CINEMAS</text>
+          <g fill="#9ee2ff"><circle class="bulb" style="--i:0" cx="258" cy="56" r="2.6"/><circle class="bulb" style="--i:1" cx="270" cy="56" r="2.6"/><circle class="bulb" style="--i:2" cx="282" cy="56" r="2.6"/><circle class="bulb" style="--i:0" cx="294" cy="56" r="2.6"/><circle class="bulb" style="--i:1" cx="306" cy="56" r="2.6"/><circle class="bulb" style="--i:2" cx="318" cy="56" r="2.6"/><circle class="bulb" style="--i:0" cx="330" cy="56" r="2.6"/><circle class="bulb" style="--i:1" cx="342" cy="56" r="2.6"/><circle class="bulb" style="--i:2" cx="354" cy="56" r="2.6"/><circle class="bulb" style="--i:0" cx="366" cy="56" r="2.6"/><circle class="bulb" style="--i:1" cx="378" cy="56" r="2.6"/><circle class="bulb" style="--i:0" cx="258" cy="112" r="2.6"/><circle class="bulb" style="--i:1" cx="270" cy="112" r="2.6"/><circle class="bulb" style="--i:2" cx="282" cy="112" r="2.6"/><circle class="bulb" style="--i:0" cx="294" cy="112" r="2.6"/><circle class="bulb" style="--i:1" cx="306" cy="112" r="2.6"/><circle class="bulb" style="--i:2" cx="318" cy="112" r="2.6"/><circle class="bulb" style="--i:0" cx="330" cy="112" r="2.6"/><circle class="bulb" style="--i:1" cx="342" cy="112" r="2.6"/><circle class="bulb" style="--i:2" cx="354" cy="112" r="2.6"/><circle class="bulb" style="--i:0" cx="366" cy="112" r="2.6"/><circle class="bulb" style="--i:1" cx="378" cy="112" r="2.6"/></g>
+          <rect x="300" y="126" width="40" height="12" rx="2" fill="#22a6e0" opacity=".7"/>
 
-          <g stroke="#38c3ff" stroke-width="5" stroke-linecap="round"><path d="M300 194v44M320 194v44M340 194v44"/></g>
-          <circle cx="320" cy="290" r="110" fill="url(#vglow)"/>
-          <rect x="256" y="238" width="128" height="110" fill="#1b1e1d" stroke="#a7adab" stroke-width="6"/>
-          <rect x="272" y="252" width="96" height="82" fill="#22a6e0"/>
-          <text x="320" y="292" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="16" fill="#0e1a4a">MITTAL</text>
-          <text x="320" y="308" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-size="9" letter-spacing="2" fill="#0e1a4a">COMPUTERS</text>
-          <text class="ss" x="400" y="262">SHOP 06</text>
-          <text class="ss s" x="400" y="280">GROUND FLOOR</text>
-          <text class="ss s" x="400" y="296">PUSHPANJALI COMPLEX</text>
-          <path d="M400 312h60" stroke="rgba(244,247,255,.45)"/>
-          <text class="ss s" x="400" y="330">273001</text>
+          <circle cx="320" cy="280" r="120" fill="url(#vglow)"/>
+          <rect class="ping" x="250" y="224" width="140" height="112" rx="8" fill="none" stroke="#38c3ff" stroke-width="2"/>
+          <rect x="250" y="224" width="140" height="112" rx="8" fill="url(#metal2)"/>
+          <rect x="258" y="232" width="124" height="96" rx="5" fill="#fff"/>
+          <image href="logo.png" x="266" y="248" width="108" height="38"/>
+          <text x="320" y="310" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-weight="600" font-size="10" letter-spacing="2" fill="#1d2c6f">SHOP 06</text>
+          <g transform="translate(392 186)"><g class="bob"><path d="M0 0c-8 0-14 6-14 14 0 10 14 22 14 22s14-12 14-22c0-8-6-14-14-14z" fill="#38c3ff" stroke="#fff" stroke-width="2"/><circle cx="0" cy="14" r="5" fill="#fff"/></g></g>
+
+          <text class="ss" x="452" y="246">SHOP 06</text>
+          <text class="ss s" x="452" y="266">GROUND FLOOR</text>
+          <text class="ss s" x="452" y="284">PUSHPANJALI COMPLEX</text>
+          <path d="M452 300h60" stroke="rgba(244,247,255,.45)"/>
+          <text class="ss s" x="452" y="320">GORAKHPUR 273001</text>
+          <text class="ss s" x="452" y="352" fill="#7fd3ff">ACROSS FROM PVR</text>
 
           <g class="vpulses" fill="#fff" stroke="#38c3ff" stroke-width="3">
-            <circle r="4"><animateMotion dur="5s" repeatCount="indefinite" path="M0 182H300V238"/></circle>
-            <circle r="4"><animateMotion dur="6.5s" begin="-2s" repeatCount="indefinite" path="M640 182H340V238"/></circle>
-            <circle r="4"><animateMotion dur="7s" begin="-4s" repeatCount="indefinite" path="M0 182H320V238"/></circle>
+            <circle r="4"><animateMotion dur="6s" repeatCount="indefinite" path="M-10 172H650"/></circle>
+            <circle r="4"><animateMotion dur="7.5s" begin="-3s" repeatCount="indefinite" path="M650 192H-10"/></circle>
+            <circle r="4"><animateMotion dur="5.5s" begin="-1.5s" repeatCount="indefinite" path="M650 192H-10"/></circle>
+            <circle r="3.5" stroke-width="2"><animateMotion dur="3.4s" repeatCount="indefinite" path="M320 140V226"/></circle>
           </g>
         </svg>
         <figcaption>Map not to scale</figcaption>
@@ -652,6 +690,16 @@ if (!RM && 'IntersectionObserver' in window){
     if (el.getBoundingClientRect().top < innerHeight * .92) return;
     el.classList.add('wait'); io.observe(el);
   });
+}
+
+/* ---------- count up the stats ---------- */
+if (!RM && 'IntersectionObserver' in window){
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, to = parseFloat(el.dataset.count), dp = (el.dataset.count.split('.')[1] || '').length, t0 = performance.now();
+    (function tick(now){ const t = Math.min(1, (now - t0) / 1400), v = to * (1 - Math.pow(1 - t, 3)); el.textContent = v.toFixed(dp); if (t < 1) requestAnimationFrame(tick); })(t0);
+  }), {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el => { el.textContent = (0).toFixed((el.dataset.count.split('.')[1] || '').length); cio.observe(el); });
 }
 
 /* ---------- header zones: tap lights the trace ---------- */
