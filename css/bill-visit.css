@@ -1,0 +1,108 @@
+/* ---------- the bill (cash memo) ---------- */
+.bgrid{display:grid;gap:40px}
+@media (min-width:980px){.bgrid{grid-template-columns:minmax(0,5fr) minmax(0,5fr);column-gap:72px;align-items:center}}
+/* the wrapper is the printer slot: clip-path only cuts above its top edge, so the memo can feed out from under it */
+.bill-wrap{filter:drop-shadow(0 16px 22px rgba(29,44,111,.18));justify-self:center;width:100%;max-width:440px;transform:rotate(1.2deg);clip-path:inset(0 -80px -100px -80px)}
+.bill{position:relative;background:var(--grain),#fdfcf7;padding:28px 22px 40px;font:400 .86rem/1.5 var(--mono);color:var(--ink);
+  /* body + a crisp perforated tear: one SVG tooth tiled along the bottom (round = whole teeth only) */
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Cpath d='M0 0h16L8 10z'/%3E%3C/svg%3E") left bottom/16px 10px round no-repeat;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - 9px) no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10'%3E%3Cpath d='M0 0h16L8 10z'/%3E%3C/svg%3E") left bottom/16px 10px round no-repeat}
+.bill .c{text-align:center}
+.bill p{margin:0}
+.bill .r{text-align:right}
+.bill .shop{font-weight:600;font-size:1.02rem;letter-spacing:.14em}
+.bill .shop-hi{font:700 1.3rem/1.2 var(--sans)}
+.bill .dim{color:var(--muted);font-size:.76rem}
+.bill .memo{letter-spacing:.2em;font-weight:600}
+.bill hr{border:0;border-top:1.5px dashed var(--ink);margin:14px 0;opacity:.55}
+.bill hr.dbl{border-top:4px double var(--ink);opacity:1}
+.bill .meta{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:.78rem}
+.bill .meta .hand{font-size:1.1rem;color:var(--pen)}
+.bill .cols{display:grid;grid-template-columns:2.4rem 1fr;gap:6px;padding-bottom:5px;border-bottom:1px solid var(--rule);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bill ol{list-style:none;margin:0;padding:0}
+.bill li{display:grid;grid-template-columns:2.4rem 1fr 30px;gap:6px;padding:9px 0}
+.bill li + li{border-top:1px dotted var(--rule)}
+.bill li .n{color:var(--muted);padding-left:.2em}
+.bill li b{display:block;font-weight:600}
+.bill li small{display:block;font:400 .96rem/1.35 var(--sans);color:var(--ink-2);margin-top:2px}
+.bill .btick{width:30px;height:26px;align-self:center;overflow:visible;fill:none;stroke:var(--pen);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.bill .btick path{stroke-dasharray:1 2;stroke-dashoffset:0}
+.bill .tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-weight:600;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase}
+.bill .tot .v{font:800 1.9rem/1 var(--sans);letter-spacing:0}
+.bill .tot .v small{font:500 .8rem var(--mono);color:var(--muted)}
+.bill .thx{position:relative;min-height:66px;display:flex;align-items:center;justify-content:center;margin-top:12px;padding-left:84px;text-align:center;font:400 1.35rem/1.25 var(--hand)}
+.bill .bsmall{margin-top:22px;font-size:.78rem;line-height:1.4;color:var(--muted);text-align:center}
+.bill .stamp2{position:absolute;left:-6px;top:calc(50% - 34px);padding:6px 10px 4px;border:3px solid var(--sky);border-radius:50%/60%;color:var(--sky);font:700 .72rem/1.15 var(--mono);letter-spacing:.14em;text-align:center;transform:rotate(-14deg);opacity:.85;-webkit-mask:var(--inkmask);mask:var(--inkmask)}
+.bill .stamp2 b{display:block;font:800 1.15rem/1 var(--sans);letter-spacing:.04em}
+
+/* it prints itself: feed out (1.4s) -> ticks drawn one by one -> stamp lands. Default state is the finished bill. */
+html.js:not(.rm) .bill{transition:transform 1.4s cubic-bezier(.25,.6,.3,1)}
+html.js:not(.rm) .bill .btick path{transition:stroke-dashoffset .38s cubic-bezier(.5,0,.2,1) calc(1.15s + var(--i) * .24s)}
+html.js:not(.rm) .bill .stamp2{transition:opacity .15s linear 2.2s,transform .5s var(--ease) 2.2s}
+html.js:not(.rm) .bill-wrap.wait .bill{transform:translateY(-101%);transition:none}
+html.js:not(.rm) .bill-wrap.wait .btick path{stroke-dashoffset:1.01;transition:none}
+html.js:not(.rm) .bill-wrap.wait .stamp2{opacity:0;transform:rotate(-14deg) scale(1.5);transition:none}
+
+/* ---------- visit ---------- */
+.visit{background:var(--grain),var(--paper-2);border-top:1px solid var(--rule)}
+.vgrid{display:grid;gap:40px;margin-top:44px}
+@media (min-width:980px){.vgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;align-items:center}}
+.sketch{margin:0;background:var(--grain),var(--slip);padding:14px;box-shadow:0 14px 28px -16px rgba(29,44,111,.35);transform:rotate(-.8deg)}
+.sketch svg{width:100%;height:auto}
+.sketch figcaption{margin-top:8px;font:400 .78rem/1.3 var(--mono);color:var(--muted)}
+/* the map is drawn in ballpoint: roads, then PVR, then Shop 06, then the arrow (delays live inline as --d) */
+html.js:not(.rm) .sketch .dr{stroke-dasharray:1 2;stroke-dashoffset:0;transition:stroke-dashoffset var(--t,.8s) cubic-bezier(.5,0,.2,1) var(--d,0s),fill-opacity .6s ease var(--d,0s)}
+html.js:not(.rm) .sketch .fd{transition:opacity .6s var(--ease) var(--d,0s)}
+html.js:not(.rm) .sketch.wait .dr{stroke-dashoffset:1.01;transition:none}
+html.js:not(.rm) .sketch.wait .shopbox{fill-opacity:0}
+html.js:not(.rm) .sketch.wait .fd{opacity:0;transition:none}
+
+/* the visiting card: card stock, 3.5:2 on desktop */
+.vcard{display:flex;flex-direction:column;justify-content:space-between;gap:14px;padding:20px 18px 18px;background:var(--grain),#fffdf8;border:1px solid rgba(29,44,111,.12);border-radius:4px;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(29,44,111,.14),0 22px 34px -20px rgba(29,44,111,.45);transform:rotate(.5deg)}
+.vc-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.vcard img{height:42px;width:auto}
+.vc-since{margin:0;font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.addr{display:block;font-style:normal;font-size:1rem;line-height:1.5}
+.addr [lang="hi"]{display:block;font-weight:700;font-size:1.32rem;line-height:1.2;margin-bottom:4px}
+.facts{margin:16px 0 0;padding:0}
+.facts div{display:grid;grid-template-columns:6.6em 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--rule)}
+.facts dt{font:500 .72rem/1.9 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0;font-size:.98rem;line-height:1.45}
+.vact{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:14px;border-top:1px solid var(--rule)}
+.vact .btn{min-height:46px;padding:.55em .9em .5em;font-size:.96rem}
+.vact .btn:first-child{grid-column:1/-1}
+@media (min-width:980px){
+  .vcard{aspect-ratio:7/4;padding:20px 24px 18px}
+  .vcard img{height:38px}
+  .addr{font-size:.96rem;line-height:1.45}
+  .addr [lang="hi"]{font-size:1.22rem}
+  .facts dd{font-size:.94rem;line-height:1.35}
+  .vact{padding-top:12px}
+  .vact .btn{min-height:44px}
+  .vc-body{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px}
+  .facts{margin:0}
+  .facts div{display:block;padding:5px 0}
+  .facts div:first-child{border-top:0;padding-top:0}
+  .facts dt{line-height:1.6}
+  .vact{display:flex}
+  .vact .btn{flex:1 1 auto}
+}
+@media (hover:hover) and (pointer:fine){
+  html:not(.rm) .vcard{transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+  html:not(.rm) .vcard:hover{transform:translateY(-6px) rotate(-.4deg);box-shadow:inset 0 1px 0 #fff,0 2px 3px rgba(29,44,111,.12),0 34px 44px -24px rgba(29,44,111,.5)}
+}
+
+/* ---------- footer: the bill book's stub, perforated, with the shop's rubber stamp ---------- */
+footer.bfoot{position:relative;background:var(--grain),var(--kraft);color:var(--ink);padding-top:44px}
+footer.bfoot::before{content:"";position:absolute;left:0;right:0;top:12px;height:6px;background:radial-gradient(circle,var(--paper-2) 0 2.4px,#0000 2.9px) 0 0/13px 6px repeat-x}
+.bfoot .fin{align-items:center}
+.bfoot p{margin:0}
+.bfoot .nw{white-space:nowrap}
+.rstamp{position:relative;display:inline-block;padding:10px 16px 8px;font:500 .86rem/1.4 var(--mono);color:var(--ink);transform:rotate(-1.2deg)}
+.rstamp::after{content:"";position:absolute;inset:0;border:3px double currentColor;border-radius:5px;-webkit-mask:var(--inkmask);mask:var(--inkmask)}
+.rstamp [lang="hi"]{font-size:1.2rem;font-weight:700;color:var(--ink);margin-right:.15em}
+.bfoot .credit{font:400 .78rem/1.5 var(--mono);color:var(--ink-2)}
+@media (max-width:599px){.rstamp [lang="hi"]{display:block}.rstamp .dot{display:none}}
+
+/* the tilted memo must not widen the page on phones */
+.why,.visit{overflow-x:clip}

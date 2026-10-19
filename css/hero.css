@@ -1,0 +1,97 @@
+/* ---------- hero: "Shutter khulta hai" — the shutter on Cinema Road rolls up, you walk to the counter ---------- */
+.hero-wrap{--tb:60px;--bh:84px;--rib:18px;--rail:8px;position:relative;height:140svh;background:var(--paper)}
+@media (min-width:900px){.hero-wrap{--tb:70px;--bh:118px;--rib:24px;--rail:14px;height:185svh}}
+html.rm .hero-wrap{height:100svh}
+.hero{position:sticky;top:0;height:100svh;min-height:580px;overflow:hidden;background:var(--paper-2)}
+
+/* inside the shop */
+.fallback,#shop3d{position:absolute;left:0;right:0;bottom:0;top:var(--tb);width:100%;height:calc(100% - var(--tb))}
+#shop3d{opacity:0}
+.hero.gl #shop3d{opacity:1}
+.hero.gl .fallback{visibility:hidden}
+
+/* the shutter: ribbed sheet painted cream, a little dirty near the floor */
+.well{position:absolute;left:0;right:0;bottom:0;top:calc(var(--tb) + var(--bh));overflow:hidden}
+.shutter{position:absolute;inset:0;will-change:transform;
+  background:
+    radial-gradient(60% 18% at 22% 100%,rgba(92,72,40,.13),transparent 70%),
+    radial-gradient(40% 14% at 82% 100%,rgba(92,72,40,.1),transparent 70%),
+    linear-gradient(180deg,rgba(29,44,111,.2),rgba(29,44,111,0) 34px),
+    var(--grain),
+    repeating-linear-gradient(180deg,#f3eee3 0 2px,#e8e1d2 2px calc(var(--rib)*.5),#ddd5c3 calc(var(--rib)*.5) calc(var(--rib) - 5px),#c4b9a3 calc(var(--rib) - 5px) calc(var(--rib) - 3px),#eee8db calc(var(--rib) - 3px) var(--rib))}
+/* the ribs run over the painted letters too */
+.shutter::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(180deg,transparent 0 calc(var(--rib)*.5),rgba(70,52,24,.06) calc(var(--rib)*.5) calc(var(--rib) - 5px),rgba(70,52,24,.2) calc(var(--rib) - 5px) calc(var(--rib) - 3px),rgba(255,255,255,.22) calc(var(--rib) - 3px) var(--rib))}
+
+.paint{position:absolute;left:calc(var(--gut) + var(--rail));right:calc(var(--gut) + var(--rail));top:22px}
+@media (min-width:900px){.paint{left:max(48px,calc((100vw - var(--maxw))/2));right:auto;top:auto;bottom:max(64px,7svh);width:min(720px,54vw)}}
+.paint h1{position:relative;z-index:1;margin:0;font:800 clamp(2.3rem,min(1.2rem + 3.7vw,8.2vh),4.6rem)/1.02 var(--sans);letter-spacing:-.02em;color:var(--ink);text-wrap:balance}
+.hl{position:relative;display:inline-block}
+.hl::after{content:"";position:absolute;left:-1%;right:-2%;bottom:-.04em;height:.2em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'%3E%3Cpath d='M4 15C70 9 150 7 230 9s120 4 166 1M30 20c90-5 200-6 330-3' fill='none' stroke='%2322a6e0' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+
+/* a parchi pasted on the shutter, two bits of tape */
+.notice{position:relative;z-index:3;margin-top:22px;max-width:540px;padding:18px 18px 16px;background:var(--grain),var(--slip);transform:rotate(-.6deg);box-shadow:0 12px 26px -14px rgba(29,44,111,.5),0 2px 4px -2px rgba(29,44,111,.25)}
+.notice::before,.notice::after{content:"";position:absolute;top:-10px;width:64px;height:20px;background:rgba(221,205,172,.82);box-shadow:0 1px 2px rgba(70,52,24,.15)}
+.notice::before{left:18px;transform:rotate(-5deg)}
+.notice::after{right:18px;transform:rotate(4deg)}
+.notice .sub{margin:0;max-width:46ch;font-size:clamp(1rem,.96rem + .3vw,1.18rem);line-height:1.5;color:var(--ink-2)}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.notice .jd{margin:14px 0 0;font:500 .8rem/1.45 var(--mono);letter-spacing:.02em;color:var(--ink-2)}
+.notice .jd b{color:var(--ink);font-weight:600}
+.notice .hand{color:var(--pen)}
+@media (max-width:899px){.ctas .btn{flex:1 1 220px}}
+
+/* the shop number, sign-painted in outline on the right half */
+.shopno{display:none}
+@media (min-width:900px){
+  .shopno{display:block;position:absolute;z-index:1;right:max(56px,calc((100vw - var(--maxw))/2 + 8px));bottom:max(120px,13svh);margin:0;text-align:center;
+    font:600 clamp(9rem,15vw,15rem)/.8 var(--mono);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:3px var(--ink);opacity:.85}
+  .shopno span{display:block;margin-bottom:18px;font:600 1.6rem/1 var(--mono);letter-spacing:.3em;color:var(--ink);-webkit-text-stroke:0;text-transform:uppercase}
+}
+
+/* bottom angle with the two pull handles and the lock hasp */
+.bar{position:absolute;left:0;right:0;bottom:0;height:34px;z-index:3;display:flex;justify-content:space-around;align-items:center;padding:0 18%;background:linear-gradient(180deg,#cfc5b0,#b9ad94);border-top:2px solid rgba(29,44,111,.35)}
+.handle{width:56px;height:16px;margin-top:-4px;border:3px solid var(--ink);border-top:0;border-radius:0 0 10px 10px}
+.lock{width:22px;height:26px;border-radius:3px;background:var(--ink);box-shadow:0 3px 5px -2px rgba(29,44,111,.5)}
+@media (max-width:899px){.bar{height:28px;padding:0 12%}.handle{width:40px}}
+
+/* shopfront: signboard on the hood, guide rails either side */
+.front{position:absolute;inset:0;z-index:4;pointer-events:none;transform-origin:50% 62%;will-change:transform,opacity}
+.board{position:absolute;left:0;right:0;top:var(--tb);height:var(--bh);display:flex;align-items:center;gap:14px;padding:0 calc(var(--gut) + var(--rail));
+  background:var(--grain),var(--ink);color:var(--slip);box-shadow:0 10px 18px -10px rgba(29,44,111,.55)}
+.board::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;background:#121c4e;border-radius:0 0 3px 3px}
+.plate{flex:none;display:grid;place-items:center;background:#fff;border-radius:50%;width:58px;height:58px;padding:4px}
+.plate img{width:100%;height:auto}
+.plate .lg{display:none}
+.bname{display:flex;flex-direction:column;min-width:0}
+.bname b{font:800 clamp(1.9rem,1.2rem + 3vw,3.6rem)/1.05 var(--sans);white-space:nowrap}
+.bname small{display:none}
+.bphone{display:none}
+@media (min-width:900px){
+  .board{gap:28px;padding:0 max(48px,calc((100vw - var(--maxw))/2))}
+  .plate{border-radius:6px;width:auto;height:78px;padding:8px 14px}
+  .plate .lg{height:62px;width:auto}
+  .plate .lg{display:block}.plate .mk{display:none}
+  .bname small{display:block;margin-top:4px;font:500 .9rem/1.4 var(--mono);letter-spacing:.02em;color:#c8d2f0}
+  .bphone{display:block;margin-left:auto;font:600 1.5rem/1 var(--mono);letter-spacing:.06em;padding:12px 16px;border:2px solid rgba(252,250,244,.7);border-radius:6px;white-space:nowrap}
+}
+.rail{position:absolute;top:calc(var(--tb) + var(--bh));bottom:0;width:var(--rail);background:linear-gradient(90deg,#a99d84,#cfc5b0 40%,#9a8e75);border:1px solid rgba(29,44,111,.25)}
+.rail.l{left:0}.rail.r{right:0}
+
+/* scroll hint + arrival caption */
+.hint{position:absolute;left:50%;bottom:48px;z-index:5;transform:translateX(-50%);display:flex;align-items:center;gap:8px;margin:0;padding:8px 14px;background:var(--slip);border:1.5px solid var(--ink);border-radius:4px;font:500 .8rem/1.2 var(--mono);white-space:nowrap;pointer-events:none}
+.hint svg{width:14px;height:14px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.arrive{position:absolute;left:50%;bottom:9svh;z-index:5;transform:translateX(-50%) rotate(-1.5deg);opacity:0;pointer-events:none;width:max-content;max-width:calc(100% - 32px);margin:0;padding:14px 20px 12px;background:var(--slip);box-shadow:0 14px 30px -14px rgba(29,44,111,.45),0 2px 5px -2px rgba(29,44,111,.2);text-align:center}
+.arrive b{display:block;font:800 clamp(1.5rem,1.1rem + 1.4vw,2.2rem)/1.05 var(--sans)}
+.arrive span{display:block;margin-top:6px;font:400 1rem/1.35 var(--hand);color:var(--pen)}
+@media (max-width:899px){.hint{bottom:104px}.arrive{bottom:112px}}
+@media (max-height:700px) and (max-width:899px){.notice .jd{display:none}.hint{display:none}}
+html.rm .hint{display:none}
+@media (min-width:900px){.hint{left:auto;right:max(56px,calc((100vw - var(--maxw))/2 + 8px));transform:none;bottom:52px}}
+
+/* ---- signboard + plain paper: the hand-off ---- */
+.sign{background:var(--ink);color:var(--slip);padding:26px var(--gut) 22px;text-align:center}
+.sign p{margin:0}
+.sign [lang="hi"]{display:block;font-weight:800;font-size:clamp(2.3rem,1.2rem + 5.6vw,5rem);line-height:1.15}
+.sign .en{display:block;margin-top:6px;font:500 clamp(.82rem,.74rem + .3vw,.95rem)/1.5 var(--mono);letter-spacing:.03em;color:#c8d2f0}
+.sign .en i{font-style:normal;color:var(--sky)}
