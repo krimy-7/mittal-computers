@@ -2,7 +2,7 @@
 .hero-wrap{--tb:60px;--bh:84px;--rib:18px;--rail:8px;position:relative;height:140svh;background:var(--paper)}
 @media (min-width:900px){.hero-wrap{--tb:70px;--bh:118px;--rib:24px;--rail:14px;height:185svh}}
 html.rm .hero-wrap{height:100svh}
-.hero{position:sticky;top:0;height:100svh;min-height:580px;overflow:hidden;background:var(--paper-2)}
+.hero{position:sticky;top:0;height:100svh;min-height:460px;overflow:hidden;background:var(--paper-2)}
 
 /* inside the shop */
 .fallback,#shop3d{position:absolute;left:0;right:0;bottom:0;top:var(--tb);width:100%;height:calc(100% - var(--tb))}
@@ -95,3 +95,15 @@ html.rm .hint{display:none}
 .sign [lang="hi"]{display:block;font-weight:800;font-size:clamp(2.3rem,1.2rem + 5.6vw,5rem);line-height:1.15}
 .sign .en{display:block;margin-top:6px;font:500 clamp(.82rem,.74rem + .3vw,.95rem)/1.5 var(--mono);letter-spacing:.03em;color:#c8d2f0}
 .sign .en i{font-style:normal;color:var(--sky)}
+
+/* short desktop windows (laptops, browser panes): keep the painted headline clear of the signboard */
+@media (min-width:900px) and (max-height:820px){
+  .paint{bottom:max(26px,4svh)}
+  .paint h1{font-size:clamp(2rem,min(1rem + 3vw,7.2vh),3.7rem)}
+  .paint h1 br:last-of-type{display:none}
+  .notice{margin-top:14px;padding:14px 16px 12px}
+  .notice .ctas{margin-top:12px}
+  .notice .jd{margin-top:8px}
+  .hint{bottom:28px}
+}
+@media (min-width:900px) and (max-height:620px){.notice .jd{display:none}.notice .sub{font-size:1rem;line-height:1.4}}
