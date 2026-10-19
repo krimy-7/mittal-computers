@@ -214,3 +214,20 @@ if (!RM){
   Promise.all([ready, logoReady]).then(() => { billTex.redraw(); chipTex.redraw(); painted = false; apply(cur); hero.classList.add('gl'); });
 })();
 })();
+
+/* snap the painted headline onto the shutter's rib grid (layout-only; the shutter's own scroll transform doesn't change it) */
+(function(){
+  const sh = document.getElementById('shutter'), paint = sh && sh.querySelector('.paint'), wrapEl = document.getElementById('heroWrap');
+  if (!paint) return;
+  // move the headline and the taped notice separately: the headline stays under the rib shading, the notice stays above it
+  const parts = [paint.querySelector('h1'), paint.querySelector('.notice')].filter(Boolean);
+  function snap(){
+    parts.forEach(el => el.style.translate = '');
+    const rib = parseFloat(getComputedStyle(wrapEl).getPropertyValue('--rib')) || 24;
+    const off = parts[0].getBoundingClientRect().top - sh.getBoundingClientRect().top, d = Math.round(off / rib) * rib - off;
+    parts.forEach(el => el.style.translate = `0 ${d}px`);
+  }
+  addEventListener('resize', snap);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(snap);
+  snap();
+})();
